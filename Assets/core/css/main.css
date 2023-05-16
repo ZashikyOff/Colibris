@@ -6,22 +6,38 @@ html * {
 
 /* Page Index ----------------------------- */
 body.index {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 100vh;
     width: 100vw;
     max-width: 100vw;
     /* overflow: hidden; */
 }
+body.index * {
+    z-index: 2;
+}
+
 body.index .background {
+    position: fixed;
+    z-index: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #509a5c;
+}
+
+body.index .background img{
     position: fixed;
     z-index: -1;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     object-fit: cover;
 }
 nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
     padding: 10px;
     max-height: 50px;
     background-color: #509a5cf2;
@@ -46,18 +62,82 @@ nav ul li a,nav ul li a:visited{
 body.index main {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: 100vw;
 }
 
 body.index main .left,body.index main .right {
+    display: none;
     background-color: #509a5c91;
     width: 10%;
+    min-height: max-content;
+    /* padding: 50% 5%; */
     height: 100%;
 }
 body.index main .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 80%;
     height: 100%;
     background-color: #ffffff;
 }
+
+body.index main .middle h2 {
+    margin: 5px;
+}
+
+body.index main .middle .apropos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+body.index main .us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+body.index main .us .equipe {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+body.index main .us .equipe img {
+     height: 25vw;
+     width: 25vw;
+     object-fit: cover;
+}
+
+body.index main .where {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+body.index main .where iframe {
+    height: 45vw;
+    width: 60vw;
+}
+
+body.index main .middle footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    background-color: #C3FACB;
+}
+
+/* Page Contact ------------------------------------------------ */
