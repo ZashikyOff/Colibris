@@ -183,6 +183,7 @@ body.index main .middle footer{
     padding: 5px;
     border: 1px solid #509a5c;
     border-radius: 5px;
+    resize: none;
 }
 
 .contact .container form input:focus, .contact .container form textarea:focus {

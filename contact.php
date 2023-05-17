@@ -86,7 +86,7 @@ if(isset($_POST['email']) && isset($_POST['message'])){
         <h1>L'atelier des Colibris</h1>
         <ul>
             <li><a href="articles.php">Articles</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="index.php">Accueil</a></li>
         </ul>
     </nav>
     <h1>Pour nous Contacter</h1>
@@ -102,8 +102,6 @@ if(isset($_POST['email']) && isset($_POST['message'])){
             <input type="submit" value="Envoyer">
         </form>
     </div>
-    <a href="./index.php">Index</a>
-    <a href="./articles.php">Articles</a>
 </body>
 
 </html>

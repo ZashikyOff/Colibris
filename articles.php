@@ -19,7 +19,7 @@ $title = "Articles";
         <img src="Assets/img/logo.png" class="logo">
         <h1>L'atelier des Colibris</h1>
         <ul>
-            <li><a href="articles.php">Articles</a></li>
+            <li><a href="index.php">Acceuil</a></li>
             <li><a href="contact.php">Contact</a></li>
         </ul>
     </nav>
