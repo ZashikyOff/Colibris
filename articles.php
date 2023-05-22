@@ -50,7 +50,14 @@ $title = "Articles";
             </div>
         </form>
         <div class="card">
-
+            <img src="Assets/img/chemise.jpg">
+            <hr>
+            <h3 class="name_article">Chemise</h3>
+            <p class="desc">Description :
+                Chemise Bleu des année 2010
+                De taille XS
+                Neuve</p>
+            <button type="submit">Voir Plus</button>
         </div>
     </main>
 </body>

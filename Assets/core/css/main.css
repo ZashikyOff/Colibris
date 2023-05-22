@@ -222,6 +222,44 @@ body.articles main form select option{
     font-size: 3.5vw;
 }
 
+body.articles .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 450px;
+    border-radius: 15px;
+    background-color: #98CEA1;
+}
+
+body.articles .card img {
+    height: 150px;
+    width: 100%;
+    border: 4px solid transparent;
+    border-radius: 15px 15px 15px 15px;
+    object-fit: cover;
+}
+
+body.articles .card hr {
+    width: 90%;
+    height: 1px;
+    border: none;
+    background-color: #305936;
+}
+
+body.articles .card .desc {
+    width: 90%;
+}
+
+body.articles .card button {
+    height: 35px;
+    width: 100px;
+    background-color: #5B8D63;
+    color: #E2FFE7;
+    border: none;
+    border-radius: 15px;
+}
+
 /* Page Contact ------------------------------------------------ */
 .contact{
     display: flex;
