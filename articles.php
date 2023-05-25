@@ -1,7 +1,25 @@
 <?php
+session_name("colibris");
+session_start();
 
 $title = "Articles";
 
+require "Assets/core/config/config.php";
+
+try {
+    $sql = "SELECT * FROM article";
+    $results = $lienDB->query($sql);
+} catch (Exception $e) {
+    print_r($e);
+}
+try {
+    $sqlcategorie = "SELECT * FROM categorie";
+    $resultscategories = $lienDB->query($sqlcategorie);
+} catch (Exception $e) {
+    print_r($e);
+}
+$resultscategories = $resultscategories->fetchAll();
+$results = $results->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,11 +52,14 @@ $title = "Articles";
             <div class="filter">
                 <label for="category">Category :</label>
                 <select name="category">
-                    <option value="">-- Choose --</option>
-                    <option value="">Vetement</option>
-                    <option value="">Tech</option>
-                    <option value="">Meuble</option>
-                    <option value="">Outils</option>
+                <option value="">-- Choose --</option>
+                    <?php
+                    foreach ($resultscategories as $resultcategorie) {
+                        ?>
+                        <option value=""><?= $resultcategorie["nom"]?></option>
+                        <?php
+                    }
+                    ?>
                 </select>
                 <label for="time">Date :</label>
                 <select name="time">
@@ -49,15 +70,19 @@ $title = "Articles";
                 <button type="submit">Appliquer</button>
             </div>
         </form>
-        <div class="card">
-            <img src="Assets/img/chemise.jpg">
-            <hr>
-            <h3 class="name_article">Chemise</h3>
-            <p class="desc">Description :
-                Chemise Bleu des année 2010
-                De taille XS
-                Neuve</p>
-            <button type="submit">Voir Plus</button>
+        <div class="all-cards">
+        <?php
+        foreach ($results as $result) {
+        ?>
+            <div class="card">
+                <img src="<?= $result["img_path"] ?>">
+                <hr>
+                <h3 class="name_article"><?= $result["nom_article"] ?></h3>
+                <p class="desc"><?= $result["description"] ?></p>
+            </div>
+        <?php
+        }
+        ?>
         </div>
     </main>
 </body>
