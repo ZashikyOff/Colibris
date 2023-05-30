@@ -5,21 +5,32 @@ session_start();
 $title = "Articles";
 
 require "Assets/core/config/config.php";
+require "Assets/core/Entity/Article.php";
 
-try {
-    $sql = "SELECT * FROM article";
-    $results = $lienDB->query($sql);
-} catch (Exception $e) {
-    print_r($e);
+use Core\Entity\Article;
+
+
+// var_dump($_POST);
+
+if(!isset($_POST["search"]) && !isset($_POST["category"])){
+    $results = Article::AllArticle();
 }
-try {
-    $sqlcategorie = "SELECT * FROM categorie";
-    $resultscategories = $lienDB->query($sqlcategorie);
-} catch (Exception $e) {
-    print_r($e);
+if(isset($_POST["search"]) && strlen($_POST["search"]) <= 1){
+    $results = Article::AllArticle();
 }
-$resultscategories = $resultscategories->fetchAll();
-$results = $results->fetchAll();
+if (isset($_POST["search"]) && !empty($_POST["search"])) {
+    $results = Article::ArticleByName($_POST["search"]);
+    if (isset($_POST["category"]) && !empty($_POST["category"])) {
+        $results = Article::ArticleByNameAndCategorie($_POST["search"], $_POST["category"]);
+    }
+} else {
+    if (isset($_POST["category"]) && !empty($_POST["category"])) {
+        $results = Article::ArticleByCategory($_POST["category"]);
+    }
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -50,39 +61,51 @@ $results = $results->fetchAll();
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div class="filter">
-                <label for="category">Category :</label>
-                <select name="category">
-                <option value="">-- Choose --</option>
-                    <?php
-                    foreach ($resultscategories as $resultcategorie) {
-                        ?>
-                        <option value=""><?= $resultcategorie["nom"]?></option>
+                <div class="categoriefilter">
+                    <label for="category">Category :</label>
+                    <select name="category">
+                        <option value="">-- Choose --</option>
                         <?php
-                    }
-                    ?>
-                </select>
-                <label for="time">Date :</label>
-                <select name="time">
-                    <option value="">-- Choose --</option>
-                    <option value="recent">Plus Récent</option>
-                    <option value="ancien">Plus Ancient</option>
-                </select>
+                        $resultscategories = Article::AllCategories();
+                        foreach ($resultscategories as $resultcategorie) {
+                        ?>
+                            <option value="<?= $resultcategorie["id"] ?>"><?= $resultcategorie["nom"] ?></option>
+                        <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="timefilter">
+                    <label for="time">Date :</label>
+                    <select name="time">
+                        <option value="">-- Choose --</option>
+                        <option value="recent">Plus Récent</option>
+                        <option value="ancien">Plus Ancient</option>
+                    </select>
+                </div>
                 <button type="submit">Appliquer</button>
             </div>
         </form>
         <div class="all-cards">
-        <?php
-        foreach ($results as $result) {
-        ?>
-            <div class="card">
-                <img src="<?= $result["img_path"] ?>">
-                <hr>
-                <h3 class="name_article"><?= $result["nom_article"] ?></h3>
-                <p class="desc"><?= $result["description"] ?></p>
-            </div>
-        <?php
-        }
-        ?>
+            <?php
+            if(count($results) == 0){
+                
+                ?>
+                <h3>Aucun Resultat</h3>
+                <?php
+            }
+
+            foreach ($results as $result) {
+            ?>
+                <div class="card">
+                    <img src="<?= $result["img_path"] ?>">
+                    <hr>
+                    <h3 class="name_article"><?= $result["nom_article"] ?></h3>
+                    <p class="desc"><?= $result["description"] ?></p>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </main>
 </body>

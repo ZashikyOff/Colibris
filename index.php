@@ -31,7 +31,9 @@ $title = "Accueil";
         </ul>
     </nav>
     <main>
-        <div class="left"></div>
+        <div class="left">
+            <img src="Assets/img/backgroundgreen.png">
+        </div>
         <div class="middle">
             <div class="apropos">
                 <h2>A propos de Nous</h2>
@@ -42,9 +44,9 @@ $title = "Accueil";
             <div class="us">
                 <h2>Notre Equipe</h2>
                 <div class="equipe">
-                    <img src="Assets/img/profile.jpg" alt="">
-                    <img src="Assets/img/profile.jpg" alt="">
-                    <img src="Assets/img/profile.jpg" alt="">
+                    <img src="Assets/img/profile.jpg" draggable="false">
+                    <img src="Assets/img/profile.jpg" draggable="false">
+                    <img src="Assets/img/profile.jpg" draggable="false">
                 </div>
             </div>
             <div class="where">
@@ -52,7 +54,9 @@ $title = "Accueil";
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222159.9921889033!2d5.231439609870787!3d43.41726139194625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c9bf4344da5333%3A0x40819a5fd970220!2sMarseille!5e0!3m2!1sfr!2sfr!4v1684221811614!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-        <div class="right"></div>
+        <div class="right">
+            <img src="Assets/img/backgroundgreen.png">
+        </div>
     </main>
     <footer>
         Credit - &copy; Xenatil - 2023

@@ -64,9 +64,10 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
         </ul>
     </nav>
     <main>
+        <h2>Connecter vous au Panel Admin</h2>
         <form action="" method="post">
-            <input type="email" name="email" required>
-            <input type="password" name="password" required>
+            <input type="email" name="email" placeholder="Entrez votre Email..." required>
+            <input type="password" name="password" placeholder="Entrez votre mot de passe..." required>
             <button type="submit">Connexion</button>
         </form>
     </main>

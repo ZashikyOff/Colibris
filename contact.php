@@ -10,15 +10,15 @@ require 'composer/vendor/phpmailer/phpmailer/src/Exception.php';
 require 'composer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'composer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
-if(isset($_POST['email']) && isset($_POST['message'])){
+if (isset($_POST['email']) && isset($_POST['message'])) {
 
     $_POST['email'] = htmlspecialchars($_POST['email']);
     $_POST['message'] = htmlspecialchars($_POST['message']);
-    
+
     $mail = new PHPMailer();
     $email = $_POST['email'];
     $message = $_POST['message'];
-    if (isset($_FILES['image'])){
+    if (isset($_FILES['image'])) {
         $image = $_FILES['image'];
     }
 
@@ -51,7 +51,7 @@ if(isset($_POST['email']) && isset($_POST['message'])){
         $mail->addAddress("");
 
         //Attachments
-        if (isset($_FILES['image'])){
+        if (isset($_FILES['image'])) {
             $mail->addAttachment($image['tmp_name'], $image['name']);
         }
 
@@ -64,7 +64,6 @@ if(isset($_POST['email']) && isset($_POST['message'])){
     } catch (Exception $e) {
         echo "Le mail n'a pas pu être envoyer. Erreur Mail: {$mail->ErrorInfo}";
     }
-
 }
 
 ?>
@@ -85,8 +84,8 @@ if(isset($_POST['email']) && isset($_POST['message'])){
         <img src="Assets/img/logo.png" class="logo">
         <h1>L'atelier des Colibris</h1>
         <ul>
-            <li><a href="articles.php">Articles</a></li>
             <li><a href="index.php">Accueil</a></li>
+            <li><a href="articles.php">Articles</a></li>
         </ul>
     </nav>
     <h1>Pour nous Contacter</h1>
