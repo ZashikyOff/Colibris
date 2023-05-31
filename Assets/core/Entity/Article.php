@@ -116,4 +116,37 @@ class Article
         }
         return $results;
     }
+
+    public static function UpdateArticle($id_article ,$nom_article, $description)
+    {
+        require "config.php";
+        try {
+            $sql = "UPDATE article SET nom_article = :nom, description = :desc WHERE id_article = :id";
+            $query = $lienDB->prepare($sql);
+            $query->bindValue(":id", $id_article, PDO::PARAM_INT);
+            $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
+            $query->bindValue(":desc", $description, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
+
+    public static function CreateArticle()
+    {
+        require "config.php";
+        try {
+            $sql = "INSERT INTO article ";
+            $query = $lienDB->prepare($sql);
+            $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
+            $query->bindValue(":desc", $description, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
 }
