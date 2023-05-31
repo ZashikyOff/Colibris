@@ -1,4 +1,7 @@
 <?php
+
+use Core\Entity\Article;
+
 session_name("colibris");
 session_start();
 
@@ -26,7 +29,7 @@ if (isset($_SESSION["email"])) {
         if ($results) {
             // Connexion réussie
             // header('Location: panel.php');
-        }else {
+        } else {
             header('Location: index.php');
         }
     }
@@ -60,10 +63,20 @@ $results = $results->fetchAll();
             <li><a href="Assets/core/logout.php">Acceuil</a></li>
         </ul>
     </nav>
-    <a href="Assets/core/newarticle.php">Nouvel Article</a>
-
-    <div class="all-cards">
+    <main>
+        <div class="list-categorie">
             <?php
+            $results = Article::AllCategories();
+        foreach ($results as $result) {
+            ?>
+            <a href="panel.php?categorie=<?= $result["id"] ?>"><?= $result["nom"] ?></a>
+            <?php
+            }
+            ?>
+        </div>
+        <div class="all-cards">
+            <?php
+            $results = Article::ArticleByCategory($_GET["categorie"]);
             foreach ($results as $result) {
             ?>
                 <div class="card">
@@ -76,6 +89,7 @@ $results = $results->fetchAll();
             }
             ?>
         </div>
+    </main>
 </body>
 
 </html>
