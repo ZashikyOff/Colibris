@@ -12,10 +12,10 @@ use Core\Entity\Article;
 
 // var_dump($_POST);
 
-if(!isset($_POST["search"]) && !isset($_POST["category"])){
+if (!isset($_POST["search"]) && !isset($_POST["category"])) {
     $results = Article::AllArticle();
 }
-if(isset($_POST["search"]) && strlen($_POST["search"]) <= 1){
+if (isset($_POST["search"]) && strlen($_POST["search"]) <= 1) {
     $results = Article::AllArticle();
 }
 if (isset($_POST["search"]) && !empty($_POST["search"])) {
@@ -54,6 +54,11 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
         </ul>
     </nav>
     <main>
+        <script src="Assets/core/js/app.js" defer></script>
+        <div id="fullscreen">
+            <span id="close">&times;</span>
+            <img src="" id="fullscreen-image" alt="Fullscreen Image">
+        </div>
         <h1>Articles a Disposition</h1>
         <form action="" method="post">
             <div class="searchbar">
@@ -88,11 +93,11 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
         </form>
         <div class="all-cards">
             <?php
-            if(count($results) == 0){
-                
-                ?>
+            if (count($results) == 0) {
+
+            ?>
                 <h3>Aucun Resultat</h3>
-                <?php
+            <?php
             }
 
             foreach ($results as $result) {
