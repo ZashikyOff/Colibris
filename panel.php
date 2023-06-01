@@ -39,14 +39,76 @@ if (isset($_SESSION["email"])) {
 }
 
 var_dump($_POST);
-if(isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1){
-    Article::UpdateArticle($_POST["id"],$_POST["nom_article"],$_POST["desc"]);
-}else {
-    Article::UpdateArticle($_POST["id"],$_POST["nom"],$_POST["desc"]);
+if (isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1) {
+    Article::UpdateArticle($_POST["id"], $_POST["nom_article"], $_POST["desc"]);
+} else {
+    Article::UpdateArticle($_POST["id"], $_POST["nom"], $_POST["desc"]);
 }
 
-if(isset($_POST["image_article"])){
+if (isset($_POST["new_article"]) && $_POST["new_article"] = "1") {
 
+    $_POST["nom_article"] = $nom;
+    $_POST["desc"] = $desc;
+    $_POST["category"] = $categorie;
+
+    //On écrit la requete
+    $sql = "INSERT INTO article (nom_article, description, categorie, date_created) VALUES(:nom, :desc, :categorie, :date);";
+
+    try {
+
+        //On prépare la requete
+        $query = $lienDB->prepare($sql);
+
+
+        //On injecte les valeurs
+        date_default_timezone_set('Europe/Paris');
+        $date = date('d-m-y h:i:s');
+        $query->bindParam(":date", $date);
+        $query->bindValue(":nom", $nom, PDO::PARAM_STR);
+        $query->bindValue(":desc", $desc, PDO::PARAM_STR);
+        $query->bindValue(":categorie", $categorie, PDO::PARAM_INT);
+
+
+        //On exécute la requete
+        if ($query->execute()) {
+            $last_id = $lienDB->lastInsertId();
+
+            $target_dir = "Assets/core/imgbd/";
+
+            $target_file = $target_dir . basename($last_id) . ".png";
+
+            move_uploaded_file($_FILES["image_article"]["tmp_name"], $target_file);
+
+            $sql = "UPDATE article SET image=:chemin WHERE id=:last_id";
+
+            // Préparer la requête
+            $query = $lienDB->prepare($sql);
+
+            $query->bindParam(":chemin", $target_file, PDO::PARAM_STR);
+            $query->bindParam(":last_id", $last_id, PDO::PARAM_INT);
+
+            if ($query->execute()) {
+                // traitement des résultats
+                $results = $query->fetch();
+            }
+
+            echo "Aucune erreur";
+            // header('Location: new_article.php');
+        } else {
+            echo " Erreur !!!!!";
+        }
+    } catch (PDOException | Exception | Error $execption) {
+        echo "<br><br>" . $execption->getMessage();
+    }
+
+
+    //On récupére l'id de l'article
+    // $id = $lienDB->lastInsertId();
+
+    // echo "Article ajouté sous le numéro $id";
+
+} else {
+    echo "Le formulaire est incompet";
 }
 
 ?>
@@ -88,16 +150,16 @@ if(isset($_POST["image_article"])){
                         <h2>Nouvel Article</h2>
                         <input type="file" name="image_article">
                         <select name="category">
-                        <option value="">-- Categorie --</option>
-                        <?php
-                        $resultscategories = Article::AllCategories();
-                        foreach ($resultscategories as $resultcategorie) {
-                        ?>
-                            <option value="<?= $resultcategorie["id"] ?>"><?= $resultcategorie["nom"] ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
+                            <option value="">-- Categorie --</option>
+                            <?php
+                            $resultscategories = Article::AllCategories();
+                            foreach ($resultscategories as $resultcategorie) {
+                            ?>
+                                <option value="<?= $resultcategorie["id"] ?>"><?= $resultcategorie["nom"] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                     <hr>
                     <input type="hidden" name="newarticle" value="1">
