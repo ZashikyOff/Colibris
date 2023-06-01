@@ -134,12 +134,70 @@ class Article
         return $results;
     }
 
-    public static function CreateArticle()
+    public static function CreateArticle($nom_article, $description, $categorie)
+    {
+        require "config.php";
+            //On écrit la requete
+
+            try {
+
+                $sql = "INSERT INTO article (nom_article, description, categorie, date_created, img_path) VALUES(:nom, :desc, :categorie, :date, :bientot);";
+
+                //On prépare la requete
+                $query = $lienDB->prepare($sql);
+
+
+                //On injecte les valeurs
+                date_default_timezone_set('Europe/Paris');
+                $date = date('d-m-y h:i:s');
+                $query->bindParam(":date", $date);
+                $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
+                $query->bindValue(":desc", $description, PDO::PARAM_STR);
+                $query->bindValue(":categorie", $categorie, PDO::PARAM_INT);
+                $query->bindValue(":bientot", "a_venir", PDO::PARAM_STR);
+
+
+                //On exécute la requete
+                if ($query->execute()) {
+                    $last_id = $lienDB->lastInsertId();
+
+                    $target_dir = "Assets/core/imgbd/";
+
+                    $target_file = $target_dir . basename($last_id) . ".png";
+
+                    move_uploaded_file($_FILES["image_article"]["tmp_name"], $target_file);
+
+                    $sql = "UPDATE article SET img_path=:chemin WHERE id_article=:last_id";
+
+                    // Préparer la requête
+                    $query = $lienDB->prepare($sql);
+
+                    $query->bindParam(":chemin", $target_file, PDO::PARAM_STR);
+                    $query->bindParam(":last_id", $last_id, PDO::PARAM_INT);
+
+                    if ($query->execute()) {
+                        // traitement des résultats
+                        $results = $query->fetch();
+                    }
+
+                    echo "Aucune erreur";
+                    // header('Location: new_article.php');
+                } else {
+                    echo " Erreur !!!!!";
+                }
+            } catch (PDOException | Exception | Error $execption) {
+                echo "<br><br>" . $execption->getMessage();
+            }
+        return $results;
+    }
+
+    public static function DeleteArticle($id_article ,$nom_article, $description)
     {
         require "config.php";
         try {
-            $sql = "INSERT INTO article ";
+            $sql = "UPDATE article SET nom_article = :nom, description = :desc WHERE id_article = :id";
             $query = $lienDB->prepare($sql);
+            $query->bindValue(":id", $id_article, PDO::PARAM_INT);
             $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
             $query->bindValue(":desc", $description, PDO::PARAM_STR);
             $query->execute();

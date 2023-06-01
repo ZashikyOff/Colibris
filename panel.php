@@ -38,78 +38,34 @@ if (isset($_SESSION["email"])) {
     }
 }
 
-var_dump($_POST);
-if (isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1) {
-    Article::UpdateArticle($_POST["id"], $_POST["nom_article"], $_POST["desc"]);
-} else {
-    Article::UpdateArticle($_POST["id"], $_POST["nom"], $_POST["desc"]);
-}
+// var_dump($_POST);
 
-if (isset($_POST["new_article"]) && $_POST["new_article"] = "1") {
+if (!empty($_POST)) {
+    if ($_POST["newarticle"] == "1") {
+        if (strlen($_POST["nom_article"]) > 0 && !empty($_POST["category"]) && !empty($_POST["desc"])) {
 
-    $_POST["nom_article"] = $nom;
-    $_POST["desc"] = $desc;
-    $_POST["category"] = $categorie;
+            $_POST["modify"] = "0";
+            $nom = $_POST["nom_article"];
+            $desc = $_POST["desc"];
+            $categorie = $_POST["category"];
 
-    //On écrit la requete
-    $sql = "INSERT INTO article (nom_article, description, categorie, date_created) VALUES(:nom, :desc, :categorie, :date);";
-
-    try {
-
-        //On prépare la requete
-        $query = $lienDB->prepare($sql);
-
-
-        //On injecte les valeurs
-        date_default_timezone_set('Europe/Paris');
-        $date = date('d-m-y h:i:s');
-        $query->bindParam(":date", $date);
-        $query->bindValue(":nom", $nom, PDO::PARAM_STR);
-        $query->bindValue(":desc", $desc, PDO::PARAM_STR);
-        $query->bindValue(":categorie", $categorie, PDO::PARAM_INT);
-
-
-        //On exécute la requete
-        if ($query->execute()) {
-            $last_id = $lienDB->lastInsertId();
-
-            $target_dir = "Assets/core/imgbd/";
-
-            $target_file = $target_dir . basename($last_id) . ".png";
-
-            move_uploaded_file($_FILES["image_article"]["tmp_name"], $target_file);
-
-            $sql = "UPDATE article SET image=:chemin WHERE id=:last_id";
-
-            // Préparer la requête
-            $query = $lienDB->prepare($sql);
-
-            $query->bindParam(":chemin", $target_file, PDO::PARAM_STR);
-            $query->bindParam(":last_id", $last_id, PDO::PARAM_INT);
-
-            if ($query->execute()) {
-                // traitement des résultats
-                $results = $query->fetch();
-            }
-
-            echo "Aucune erreur";
-            // header('Location: new_article.php');
-        } else {
-            echo " Erreur !!!!!";
+            Article::CreateArticle($nom,$desc,$categorie);
         }
-    } catch (PDOException | Exception | Error $execption) {
-        echo "<br><br>" . $execption->getMessage();
     }
 
+    if($_POST["modify"] == "1"){
+        if (isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1) {
+            Article::UpdateArticle($_POST["id"], $_POST["nom_article"], $_POST["desc"]);
+        } else {
+            Article::UpdateArticle($_POST["id"], $_POST["nom"], $_POST["desc"]);
+        }
+    }
 
-    //On récupére l'id de l'article
-    // $id = $lienDB->lastInsertId();
-
-    // echo "Article ajouté sous le numéro $id";
-
-} else {
-    echo "Le formulaire est incompet";
+    if(isset($_POST["delete"])){
+        
+    }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -119,6 +75,7 @@ if (isset($_POST["new_article"]) && $_POST["new_article"] = "1") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="Assets/core/css/main.css">
     <title>L'atelier des Colibris - <?= $title ?></title>
 </head>
@@ -182,9 +139,14 @@ if (isset($_POST["new_article"]) && $_POST["new_article"] = "1") {
                     <form action="" method="post">
                         <input type="hidden" name="id" value="<?= $result["id_article"] ?>">
                         <input type="hidden" name="nom" value="<?= $result["nom_article"] ?>">
+                        <input type="hidden" name="modify" value="1">
                         <input type="text" name="nom_article" placeholder="<?= $result["nom_article"] ?>">
                         <textarea name="desc" cols="30" rows="10" placeholder="<?= $result["description"] ?>" class="desc" maxlength="200"><?= $result["description"] ?></textarea>
                         <button type="submit">Modifier</button>
+                    </form>
+                    <form action="" method="post" class="delete">
+                        <input type="hidden" name="delete" value="<?= $result["id_article"] ?>">
+                        <button><i class="fa-solid fa-trash"></i></button>
                     </form>
                 </div>
             <?php
