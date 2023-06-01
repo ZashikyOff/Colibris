@@ -191,20 +191,18 @@ class Article
         return $results;
     }
 
-    public static function DeleteArticle($id_article ,$nom_article, $description)
+    public static function DeleteArticle($id_article)
     {
         require "config.php";
         try {
-            $sql = "UPDATE article SET nom_article = :nom, description = :desc WHERE id_article = :id";
+            $sql = "DELETE FROM article WHERE id_article = :id";
             $query = $lienDB->prepare($sql);
             $query->bindValue(":id", $id_article, PDO::PARAM_INT);
-            $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
-            $query->bindValue(":desc", $description, PDO::PARAM_STR);
             $query->execute();
             $results = $query->fetchAll();
         } catch (Exception $e) {
             print_r($e);
         }
-        return $results;
+        return true;
     }
 }

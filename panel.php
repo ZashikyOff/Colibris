@@ -41,7 +41,7 @@ if (isset($_SESSION["email"])) {
 // var_dump($_POST);
 
 if (!empty($_POST)) {
-    if ($_POST["newarticle"] == "1") {
+    if (isset($_POST["newarticle"]) && $_POST["newarticle"] == "1") {
         if (strlen($_POST["nom_article"]) > 0 && !empty($_POST["category"]) && !empty($_POST["desc"])) {
 
             $_POST["modify"] = "0";
@@ -53,7 +53,7 @@ if (!empty($_POST)) {
         }
     }
 
-    if($_POST["modify"] == "1"){
+    if(isset($_POST["modify"]) && $_POST["modify"] == "1"){
         if (isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1) {
             Article::UpdateArticle($_POST["id"], $_POST["nom_article"], $_POST["desc"]);
         } else {
@@ -62,7 +62,7 @@ if (!empty($_POST)) {
     }
 
     if(isset($_POST["delete"])){
-        
+        Article::DeleteArticle($_POST["delete"]);
     }
 }
 
@@ -106,17 +106,27 @@ if (!empty($_POST)) {
                     <div class="img">
                         <h2>Nouvel Article</h2>
                         <input type="file" name="image_article">
-                        <select name="category">
-                            <option value="">-- Categorie --</option>
-                            <?php
-                            $resultscategories = Article::AllCategories();
-                            foreach ($resultscategories as $resultcategorie) {
+                        <?php
+                        if(isset($_GET["categorie"])){
                             ?>
-                                <option value="<?= $resultcategorie["id"] ?>"><?= $resultcategorie["nom"] ?></option>
+                            <input type="hidden" name="category" value="<?= $_GET["categorie"]?>">
                             <?php
-                            }
+                        }else {
                             ?>
-                        </select>
+                            <select name="category">
+                                <option value="">-- Categorie --</option>
+                                <?php
+                                $resultscategories = Article::AllCategories();
+                                foreach ($resultscategories as $resultcategorie) {
+                                ?>
+                                    <option value="<?= $resultcategorie["id"] ?>"><?= $resultcategorie["nom"] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <hr>
                     <input type="hidden" name="newarticle" value="1">
