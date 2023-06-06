@@ -56,7 +56,6 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
     <main>
         <script src="Assets/core/js/app.js" defer></script>
         <div id="fullscreen">
-            <span id="close">&times;</span>
             <img src="" id="fullscreen-image" alt="Fullscreen Image">
         </div>
         <h1>Articles a Disposition</h1>
@@ -103,7 +102,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
             foreach ($results as $result) {
             ?>
                 <div class="card">
-                    <img src="<?= $result["img_path"] ?>">
+                    <img src="<?= $result["img_path"] ?>" class="image_article">
                     <hr>
                     <h3 class="name_article"><?= $result["nom_article"] ?></h3>
                     <p class="desc"><?= $result["description"] ?></p>
