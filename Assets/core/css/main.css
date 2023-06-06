@@ -41,6 +41,7 @@ nav {
   padding: 10px;
   max-height: 50px;
   background-color: #509a5cf2;
+  user-select: none;
 }
 nav .logo {
   height: 50px;
@@ -316,11 +317,14 @@ body.articles .card .desc {
 
 
 /* Page Contact ------------------------------------------------ */
-.contact {
+body.contact {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  gap: 30px;
 }
+
 
 .contact .container {
   display: flex;
