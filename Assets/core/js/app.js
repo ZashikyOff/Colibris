@@ -12,6 +12,25 @@ thumbnails.forEach(function(thumbnail) {
   });
 });
 
+// Fonction pour fermer le mode plein écran
+function closeFullscreen() {
+  fullscreen.style.display = 'none'; // Masquer la div en plein écran
+}
+
+// Ajouter un écouteur d'événement sur le clic en dehors de l'image en plein écran
+fullscreen.addEventListener('click', function(event) {
+  if (event.target === fullscreen) {
+    closeFullscreen();
+  }
+});
+
+// Ajouter un écouteur d'événement pour la touche "Échap" du clavier
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeFullscreen();
+  }
+});
+
 // Ajouter un écouteur d'événement sur le clic en dehors de l'image en plein écran
 fullscreen.addEventListener('click', function(event) {
   if (event.target === fullscreen) {

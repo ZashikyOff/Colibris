@@ -28,9 +28,6 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
         $results = Article::ArticleByCategory($_POST["category"]);
     }
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
