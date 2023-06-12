@@ -235,6 +235,11 @@ class Article
         } catch (Exception $e) {
             print_r($e);
         }
+        $sql = "UPDATE article SET reserved = :reservation WHERE id_article = :id";
+        $query = $lienDB->prepare($sql);
+        $query->bindValue(":reservation", 1, PDO::PARAM_INT);
+        $query->bindValue(":id", $id_article, PDO::PARAM_INT);
+        $query->execute();
         return $results;
     }
 }
