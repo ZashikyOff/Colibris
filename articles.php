@@ -28,6 +28,10 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
         $results = Article::ArticleByCategory($_POST["category"]);
     }
 }
+
+if(isset($_POST["reservation"])){
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -103,6 +107,22 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
                     <hr>
                     <h3 class="name_article"><?= $result["nom_article"] ?></h3>
                     <p class="desc"><?= $result["description"] ?></p>
+                    <?php
+                    if ($result["reserved"] == 0) {
+                    ?>
+                        <form method="post">
+                            <input type="hidden" name="reservation" value="<?= $result["id_article"] ?>">
+                            <button class="no-reserved" type="submit">Cliquez pour Réserver</button>
+                        </form>
+                    <?php
+                    } else {
+                    ?>
+                        <form method="post">
+                            <button class="reserved" type="submit">L'article est deja Réserver</button>
+                        </form>
+                    <?php
+                    }
+                    ?>
                 </div>
             <?php
             }

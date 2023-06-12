@@ -199,7 +199,6 @@ class Article
             $query = $lienDB->prepare($sql);
             $query->bindValue(":id", $id_article, PDO::PARAM_INT);
             $query->execute();
-            $results = $query->fetchAll();
         } catch (Exception $e) {
             print_r($e);
         }
