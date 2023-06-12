@@ -4,6 +4,8 @@ html * {
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
 /* Page Index ----------------------------- */
 body.index {
   display: flex;
@@ -16,6 +18,7 @@ body.index {
 }
 body.index * {
   z-index: 2;
+  font-family: 'Special Elite', cursive;
 }
 
 body.index .background {
@@ -307,6 +310,7 @@ body.articles .card .desc {
 }
 
 body.articles .card form.reservation {
+  margin-top: 10px;
   gap: 10px;
 }
 
@@ -318,7 +322,12 @@ body.articles .card form.reservation button {
   cursor: pointer;
 }
 
+body.articles .card form.reservation button:hover {
+  background-color: #305936;
+}
+
 body.articles .card form.reservation .inputemail{
+  display: none;
   transition: all 0.5s ease-in-out;
   outline: none;
   padding: 10px;
