@@ -117,7 +117,7 @@ class Article
         return $results;
     }
 
-    public static function UpdateArticle($id_article ,$nom_article, $description)
+    public static function UpdateArticle($id_article, $nom_article, $description)
     {
         require "config.php";
         try {
@@ -137,57 +137,57 @@ class Article
     public static function CreateArticle($nom_article, $description, $categorie)
     {
         require "config.php";
-            //On écrit la requete
+        //On écrit la requete
 
-            try {
+        try {
 
-                $sql = "INSERT INTO article (nom_article, description, categorie, date_created, img_path) VALUES(:nom, :desc, :categorie, :date, :bientot);";
+            $sql = "INSERT INTO article (nom_article, description, categorie, date_created, img_path) VALUES(:nom, :desc, :categorie, :date, :bientot);";
 
-                //On prépare la requete
+            //On prépare la requete
+            $query = $lienDB->prepare($sql);
+
+
+            //On injecte les valeurs
+            date_default_timezone_set('Europe/Paris');
+            $date = date('d-m-y h:i:s');
+            $query->bindParam(":date", $date);
+            $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
+            $query->bindValue(":desc", $description, PDO::PARAM_STR);
+            $query->bindValue(":categorie", $categorie, PDO::PARAM_INT);
+            $query->bindValue(":bientot", "a_venir", PDO::PARAM_STR);
+
+
+            //On exécute la requete
+            if ($query->execute()) {
+                $last_id = $lienDB->lastInsertId();
+
+                $target_dir = "Assets/core/imgbd/";
+
+                $target_file = $target_dir . basename($last_id) . ".png";
+
+                move_uploaded_file($_FILES["image_article"]["tmp_name"], $target_file);
+
+                $sql = "UPDATE article SET img_path=:chemin WHERE id_article=:last_id";
+
+                // Préparer la requête
                 $query = $lienDB->prepare($sql);
 
+                $query->bindParam(":chemin", $target_file, PDO::PARAM_STR);
+                $query->bindParam(":last_id", $last_id, PDO::PARAM_INT);
 
-                //On injecte les valeurs
-                date_default_timezone_set('Europe/Paris');
-                $date = date('d-m-y h:i:s');
-                $query->bindParam(":date", $date);
-                $query->bindValue(":nom", $nom_article, PDO::PARAM_STR);
-                $query->bindValue(":desc", $description, PDO::PARAM_STR);
-                $query->bindValue(":categorie", $categorie, PDO::PARAM_INT);
-                $query->bindValue(":bientot", "a_venir", PDO::PARAM_STR);
-
-
-                //On exécute la requete
                 if ($query->execute()) {
-                    $last_id = $lienDB->lastInsertId();
-
-                    $target_dir = "Assets/core/imgbd/";
-
-                    $target_file = $target_dir . basename($last_id) . ".png";
-
-                    move_uploaded_file($_FILES["image_article"]["tmp_name"], $target_file);
-
-                    $sql = "UPDATE article SET img_path=:chemin WHERE id_article=:last_id";
-
-                    // Préparer la requête
-                    $query = $lienDB->prepare($sql);
-
-                    $query->bindParam(":chemin", $target_file, PDO::PARAM_STR);
-                    $query->bindParam(":last_id", $last_id, PDO::PARAM_INT);
-
-                    if ($query->execute()) {
-                        // traitement des résultats
-                        $results = $query->fetch();
-                    }
-
-                    echo "Aucune erreur";
-                    // header('Location: new_article.php');
-                } else {
-                    echo " Erreur !!!!!";
+                    // traitement des résultats
+                    $results = $query->fetch();
                 }
-            } catch (PDOException | Exception | Error $execption) {
-                echo "<br><br>" . $execption->getMessage();
+
+                echo "Aucune erreur";
+                // header('Location: new_article.php');
+            } else {
+                echo " Erreur !!!!!";
             }
+        } catch (PDOException | Exception | Error $execption) {
+            echo "<br><br>" . $execption->getMessage();
+        }
         return $results;
     }
 
@@ -203,5 +203,38 @@ class Article
             print_r($e);
         }
         return true;
+    }
+
+    public static function ArticleReservation($id_article, $email)
+    {
+        function genererChaineAleatoire($longueur = 10)
+        {
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $longueurMax = strlen($caracteres);
+            $chaineAleatoire = '';
+            for ($i = 0; $i < $longueur; $i++) {
+                $chaineAleatoire .= $caracteres[rand(0, $longueurMax - 1)];
+            }
+            return $chaineAleatoire;
+        }
+        require "config.php";
+        try {
+            $sql = "INSERT INTO reservation (id_article,reservation_date,email,code) VALUES(:id,:date,:email,:code);";
+            $query = $lienDB->prepare($sql);
+
+            $code = genererChaineAleatoire(20);
+
+            date_default_timezone_set('Europe/Paris');
+            $date = date('d-m-y h:i:s');
+            $query->bindParam(":date", $date);
+            $query->bindValue(":code", $code, PDO::PARAM_STR);
+            $query->bindValue(":id", $id_article, PDO::PARAM_INT);
+            $query->bindValue(":email", $email, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
     }
 }

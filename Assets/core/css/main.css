@@ -306,6 +306,33 @@ body.articles .card .desc {
   width: 90%;
 }
 
+body.articles .card form.reservation {
+  gap: 10px;
+}
+
+body.articles .card form.reservation button {
+  padding: 5px;
+  border-radius: 10px;
+  background-color:#509a5c;
+  border: none;
+  cursor: pointer;
+}
+
+body.articles .card form.reservation .inputemail{
+  transition: all 0.5s ease-in-out;
+  outline: none;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+
+body.articles .card form:hover .inputemail{
+  display: flex;
+}
+
+
+
 @media (max-width: 750px) {
     body.articles main form .filter {
         display: flex;

@@ -30,7 +30,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
 }
 
 if(isset($_POST["reservation"])){
-    
+    Article::ArticleReservation($_POST["reservation"],$_POST["emailreservation"]);
 }
 ?>
 <!DOCTYPE html>
@@ -110,7 +110,8 @@ if(isset($_POST["reservation"])){
                     <?php
                     if ($result["reserved"] == 0) {
                     ?>
-                        <form method="post">
+                        <form method="post" class="reservation">
+                            <input type="email" name="emailreservation" class="inputemail" placeholder="Entrez votre email...">
                             <input type="hidden" name="reservation" value="<?= $result["id_article"] ?>">
                             <button class="no-reserved" type="submit">Cliquez pour Réserver</button>
                         </form>
