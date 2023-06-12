@@ -49,11 +49,11 @@ if (!empty($_POST)) {
             $desc = $_POST["desc"];
             $categorie = $_POST["category"];
 
-            Article::CreateArticle($nom,$desc,$categorie);
+            Article::CreateArticle($nom, $desc, $categorie);
         }
     }
 
-    if(isset($_POST["modify"]) && $_POST["modify"] == "1"){
+    if (isset($_POST["modify"]) && $_POST["modify"] == "1") {
         if (isset($_POST["id"]) && strlen($_POST["nom_article"]) >= 1) {
             Article::UpdateArticle($_POST["id"], $_POST["nom_article"], $_POST["desc"]);
         } else {
@@ -61,7 +61,7 @@ if (!empty($_POST)) {
         }
     }
 
-    if(isset($_POST["delete"])){
+    if (isset($_POST["delete"])) {
         Article::DeleteArticle($_POST["delete"]);
     }
 }
@@ -85,6 +85,7 @@ if (!empty($_POST)) {
         <img src="Assets/img/logo.png" class="logo">
         <h1>L'atelier des Colibris</h1>
         <ul>
+            <li><a href="panelreservation.php">Panel Reservation</a></li>
             <li><a href="Assets/core/logout.php">Acceuil</a></li>
         </ul>
     </nav>
@@ -107,12 +108,12 @@ if (!empty($_POST)) {
                         <h2>Nouvel Article</h2>
                         <input type="file" name="image_article">
                         <?php
-                        if(isset($_GET["categorie"])){
-                            ?>
-                            <input type="hidden" name="category" value="<?= $_GET["categorie"]?>">
-                            <?php
-                        }else {
-                            ?>
+                        if (isset($_GET["categorie"])) {
+                        ?>
+                            <input type="hidden" name="category" value="<?= $_GET["categorie"] ?>">
+                        <?php
+                        } else {
+                        ?>
                             <select name="category">
                                 <option value="">-- Categorie --</option>
                                 <?php
@@ -124,7 +125,7 @@ if (!empty($_POST)) {
                                 }
                                 ?>
                             </select>
-                            <?php
+                        <?php
                         }
                         ?>
                     </div>

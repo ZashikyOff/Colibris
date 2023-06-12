@@ -118,8 +118,8 @@ if(isset($_POST["reservation"])){
                     <?php
                     } else {
                     ?>
-                        <form method="post">
-                            <button class="reserved" type="submit">L'article est deja Réserver</button>
+                        <form method="post" class="reservation">
+                            <button class="reserved" >L'article est deja réserver</button>
                         </form>
                     <?php
                     }

@@ -57,6 +57,21 @@ class Article
         return $results;
     }
 
+    public static function ArticleById($id_article)
+    {
+        require "config.php";
+        try {
+            $sql = "SELECT * FROM article WHERE id_article = :id";
+            $query = $lienDB->prepare($sql);
+            $query->bindValue(":id", $id_article, PDO::PARAM_INT);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
+    }
+
     public static function ArticleByName($nom_article)
     {
         require "config.php";
@@ -240,6 +255,20 @@ class Article
         $query->bindValue(":reservation", 1, PDO::PARAM_INT);
         $query->bindValue(":id", $id_article, PDO::PARAM_INT);
         $query->execute();
+        return $results;
+    }
+
+    public static function AllReservation()
+    {
+        require "config.php";
+        try {
+            $sql = "SELECT * FROM reservation";
+            $query = $lienDB->prepare($sql);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
         return $results;
     }
 }

@@ -2,9 +2,10 @@ html * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Playfair Display SC', serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
 
 /* Page Index ----------------------------- */
 body.index {
@@ -18,7 +19,6 @@ body.index {
 }
 body.index * {
   z-index: 2;
-  font-family: 'Special Elite', cursive;
 }
 
 body.index .background {
@@ -340,7 +340,11 @@ body.articles .card form:hover .inputemail{
   display: flex;
 }
 
-
+body.articles .card form.reservation .reserved {
+  padding: 5px 10px;
+  background-color:#65c475;
+  border: #509a5c solid 1px;
+}
 
 @media (max-width: 750px) {
     body.articles main form .filter {
@@ -588,5 +592,47 @@ body.panel .card {
   }
 
   body.panel .card form.delete {
+    margin-top: 10px;
+  }
+
+  body.panelreservation main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  body.panelreservation .all-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin-top: 15px;
+  }  
+  body.panelreservation .all-cards .article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #709b77;
+    width: 250px;
+    height: 300px;
+    border-radius: 15px;
+  }
+
+  body.panelreservation .all-cards .article p.nom_article {
+    margin-top: 10px;
+  }
+
+  body.panelreservation .all-cards .article img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0px 0px;
+  }
+
+  body.panelreservation .all-cards .article .article_reserved {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95%;
     margin-top: 10px;
   }
