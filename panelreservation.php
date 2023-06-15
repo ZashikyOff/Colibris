@@ -32,6 +32,10 @@ if (isset($_SESSION["email"])) {
     }
 }
 
+if(isset($_POST["id_article"])){
+    Article::DeleteReservation($_POST["id_article"]);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -65,7 +69,7 @@ if (isset($_SESSION["email"])) {
                 <div class="article">
                     <img src="<?= $resultarticle["img_path"] ?>">
                 <p class="nom_article">Nom de l'article : <?= $resultarticle["nom_article"] ?></p>
-                <p >ID Article : <?= $resultarticle["slug"] ?></p>
+                <p >SLUG Article : <?= $resultarticle["slug"] ?></p>
                     <div class="article_reserved">
                         <p>Code : <?= $result["code"] ?></p>
                         <p>Email : <?= $result["email"] ?></p>

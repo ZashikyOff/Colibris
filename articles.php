@@ -31,6 +31,7 @@ if (isset($_POST["search"]) && !empty($_POST["search"])) {
 
 if(isset($_POST["reservation"])){
     Article::ArticleReservation($_POST["reservation"],$_POST["emailreservation"]);
+    header('Location: articles.php');
 }
 ?>
 <!DOCTYPE html>

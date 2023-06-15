@@ -614,7 +614,7 @@ body.panel .card {
     align-items: center;
     background-color: #709b77;
     width: 300px;
-    height: 325px;
+    height: 340px;
     border-radius: 15px;
   }
 
@@ -636,4 +636,24 @@ body.panel .card {
     align-items: flex-start;
     width: 95%;
     margin-top: 10px;
+  }
+
+  body.panelreservation .all-cards .article .article_reserved form {
+    margin-top: 10px;
+    margin-left: auto;
+  }
+
+  body.panelreservation .all-cards .article .removereservation {
+    margin: auto;
+    border: none;
+    background:none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  body.panelreservation .all-cards .article .removereservation i::before {
+    display: block;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
   }
