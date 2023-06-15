@@ -40,6 +40,7 @@ if (isset($_SESSION["email"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="Assets/core/css/main.css">
     <title>Panel Reservation</title>
 </head>
@@ -63,11 +64,16 @@ if (isset($_SESSION["email"])) {
         ?>
                 <div class="article">
                     <img src="<?= $resultarticle["img_path"] ?>">
-                <p class="nom_article"><?= $resultarticle["nom_article"] ?></p>
+                <p class="nom_article">Nom de l'article : <?= $resultarticle["nom_article"] ?></p>
+                <p >ID Article : <?= $resultarticle["slug"] ?></p>
                     <div class="article_reserved">
-                        <p><?= $result["code"] ?></p>
-                        <p><?= $result["email"] ?></p>
-                        <p><?= $result["reservation_date"] ?></p>
+                        <p>Code : <?= $result["code"] ?></p>
+                        <p>Email : <?= $result["email"] ?></p>
+                        <p>Date de reservation : <?= $result["reservation_date"] ?></p>
+                        <form method="post">
+                            <input type="hidden" name="id_article" value="<?=$result["id_article"] ?>">
+                            <button type="submit" class="removereservation"><i class="fa-regular fa-circle-xmark"></i></button>
+                        </form>
                     </div>
                 </div>
         <?php
