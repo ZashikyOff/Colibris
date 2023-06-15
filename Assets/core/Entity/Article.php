@@ -250,18 +250,6 @@ class Article
         } catch (Exception $e) {
             print_r($e);
         }
-        $to = $email;
-        $subject = "Atelier des Colibris - Information";
-        $message = "Bonjour, Bonsoir ceci est un mail automatique pour vous confirmer votre reservation d'articles, vous avez une semaine pour venir le recuperer <br> Voici votre code pour venir recuperer l'article : ";
-        $headers = "From: AtelierDesColibris\r\n";
-        $headers .= "Reply-To: AtelierDesColibris\r\n";
-        $headers .= "Content-Type: text/plain; charset=utf-8\r\n";
-
-        if (mail($to, $subject, $message, $headers)) {
-            echo "E-mail envoyé avec succès.";
-        } else {
-            echo "Erreur lors de l'envoi de l'e-mail.";
-        }
         $sql = "UPDATE article SET reserved = :reservation WHERE id_article = :id";
         $query = $lienDB->prepare($sql);
         $query->bindValue(":reservation", 1, PDO::PARAM_INT);
