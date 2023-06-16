@@ -638,6 +638,12 @@ body.panel .card {
     margin-top: 10px;
   }
 
+  body.panelreservation .all-cards .article .article_reserved .qrcode{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+
   body.panelreservation .all-cards .article .article_reserved form {
     margin-top: 10px;
     margin-left: auto;
