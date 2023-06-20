@@ -64,6 +64,9 @@ if (!empty($_POST)) {
     if (isset($_POST["delete"])) {
         Article::DeleteArticle($_POST["delete"]);
     }
+    if(isset($_POST["newcategorie"])){
+        Article::AddCategory($_POST["newcategorie"]);
+    }
 }
 
 
@@ -100,6 +103,10 @@ if (!empty($_POST)) {
             <?php
             }
             ?>
+            <form method="post">
+                <input type="text" name="newcategorie" class="new_categorie">
+                <button type="submit">OK</button>
+            </form>
         </div>
         <div class="all-cards">
             <div class="card">

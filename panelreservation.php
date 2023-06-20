@@ -72,7 +72,6 @@ if (isset($_POST["id_article"])) {
                         <p class="nom_article"> Nom de l 'article : <?= $resultarticle["nom_article"] ?></p>
                         <p> SLUG Article: <?= $resultarticle["slug"] ?> </p>
                         <div class="article_reserved">
-                            <img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=<?= $result["code"] ?>&choe=UTF-8" title="Link to Google.com" class="qrcode" />
                             <p> Code: <?= $result["code"] ?> </p>
                             <p> Email: <?= $result["email"] ?> </p>
                             <p> Date de reservation: <?= $result["reservation_date"] ?> </p>

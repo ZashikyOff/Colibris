@@ -234,7 +234,7 @@ class Article
         }
         require "config.php";
         try {
-            $sql = "INSERT INTO reservation (id_article,reservation_date,email,code) VALUES(:id,:date,:email,:code);";
+            $sql = "INSERT INTO reservation (id_article,reservation_date,email,code) VALUES (:id,:date,:email,:code);";
             $query = $lienDB->prepare($sql);
 
             $code = genererChaineAleatoire(20);
@@ -289,5 +289,20 @@ class Article
         $query->bindValue(":id", $id_article, PDO::PARAM_INT);
         $query->execute();
         return true;
+    }
+
+    public static function AddCategory($nom)
+    {
+        require "config.php";
+        try {
+            $sql = "INSERT INTO categorie (nom) VALUES (:nom)";
+            $query = $lienDB->prepare($sql);
+            $query->bindValue(":nom", $nom, PDO::PARAM_STR);
+            $query->execute();
+            $results = $query->fetchAll();
+        } catch (Exception $e) {
+            print_r($e);
+        }
+        return $results;
     }
 }
