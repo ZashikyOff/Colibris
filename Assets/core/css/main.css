@@ -218,6 +218,7 @@ body.articles main form .filter button {
   padding: 5px;
   border-radius: 15px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 body.articles main form select {
@@ -233,6 +234,7 @@ body.articles main form select {
   margin-left: 10px;
   margin-right: 20px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .searchbar {
