@@ -2,10 +2,10 @@ html * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Playfair Display SC', serif;
+  font-family: "Playfair Display SC", serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap");
 
 /* Page Index ----------------------------- */
 body.index {
@@ -76,7 +76,7 @@ body.index main {
 
 body.index main .left,
 body.index main .right {
-    width: 10%;
+  width: 10%;
 }
 
 body.index main .left img,
@@ -153,13 +153,63 @@ body.index main .where iframe {
 
 body.index footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 30px;
-  background-color: rgb(152,206,161);
+  height: fit-content;
+  background-color: rgb(152, 206, 161);
 }
+
+body.index footer .top-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+body.index footer .top-footer img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+body.index footer .top-footer .info-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 5px;
+}
+
+body.index footer .info-footer * {
+  display: flex;
+  flex-direction: row;
+}
+
+body.index footer .info-footer div i {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: #305936;
+  border-radius: 10px;
+}
+
+body.index footer .info-footer div p{
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
 /* Page Articles ----------------------------------------------- */
 
 body.articles main {
@@ -288,7 +338,7 @@ body.articles .card {
 }
 
 body.articles .card:hover {
-  box-shadow: -2px -1px 48px -7px rgba(152,206,161,0.75);
+  box-shadow: -2px -1px 48px -7px rgba(152, 206, 161, 0.75);
 }
 
 body.articles .card img {
@@ -319,7 +369,7 @@ body.articles .card form.reservation {
 body.articles .card form.reservation button {
   padding: 5px;
   border-radius: 10px;
-  background-color:#509a5c;
+  background-color: #509a5c;
   border: none;
   cursor: pointer;
 }
@@ -328,7 +378,7 @@ body.articles .card form.reservation button:hover {
   background-color: #305936;
 }
 
-body.articles .card form.reservation .inputemail{
+body.articles .card form.reservation .inputemail {
   display: none;
   transition: all 0.5s ease-in-out;
   outline: none;
@@ -337,26 +387,24 @@ body.articles .card form.reservation .inputemail{
   border: none;
 }
 
-
-body.articles .card form:hover .inputemail{
+body.articles .card form:hover .inputemail {
   display: flex;
 }
 
 body.articles .card form.reservation .reserved {
   padding: 5px 10px;
-  background-color:#65c475;
+  background-color: #65c475;
   border: #509a5c solid 1px;
 }
 
 @media (max-width: 750px) {
-    body.articles main form .filter {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
+  body.articles main form .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 }
-
 
 /* Page Contact ------------------------------------------------ */
 body.contact {
@@ -366,7 +414,6 @@ body.contact {
   min-height: 100vh;
   gap: 30px;
 }
-
 
 .contact .container {
   display: flex;
@@ -422,54 +469,53 @@ body.contact {
 /* Page Login */
 
 body.login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 body.login main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 body.login main h2 {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 body.login main form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40%;
-    margin-top: 30px;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  margin-top: 30px;
+  gap: 20px;
 }
 
 body.login main form input {
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    padding: 5px;
-    outline : none;
-    border: #305936 solid 1px;
-
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px;
+  outline: none;
+  border: #305936 solid 1px;
 }
 
 body.login main form button {
-    width: 175px;
-    height: 30px;
-    border-radius: 10px;
-    padding: 5px;
-    outline : none;
-    border: #305936 solid 1px;
-    background-color: #8eca98;
-    transition: all 0.5s ease-in-out;
+  width: 175px;
+  height: 30px;
+  border-radius: 10px;
+  padding: 5px;
+  outline: none;
+  border: #305936 solid 1px;
+  background-color: #8eca98;
+  transition: all 0.5s ease-in-out;
 }
 
 body.login main form button:hover {
-    background-color: #499656;
-    color: #ffffff;
+  background-color: #499656;
+  color: #ffffff;
 }
 
 /* Page Panel */
@@ -515,166 +561,165 @@ body.panel main .list-categorie a:visited {
 body.panel main .list-categorie a:hover {
   margin-left: 3px;
   color: #305936;
-
 }
 
 body.panel .all-cards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 90%;
-    margin-top: 20px;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 90%;
+  margin-top: 20px;
+}
 
 body.panel .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    height: 375px;
-    border-radius: 15px;
-    background-color: #98cea1;
-    margin: 15px;
-    /* justify-content: space-between; */
-  }
-  
-  body.panel .card img {
-    height: 150px;
-    width: 100%;
-    border: 4px solid transparent;
-    border-radius: 15px 15px 15px 15px;
-    object-fit: cover;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 375px;
+  border-radius: 15px;
+  background-color: #98cea1;
+  margin: 15px;
+  /* justify-content: space-between; */
+}
 
-  body.panel .card .img {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 150px;
-    width: 100%;
-    border: 4px solid transparent;
-    border-radius: 15px 15px 15px 15px;
-  }
-  
-  body.panel .card hr {
-    width: 90%;
-    height: 1px;
-    border: none;
-    background-color: #305936;
-  }
-  
-  body.panel .card form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+body.panel .card img {
+  height: 150px;
+  width: 100%;
+  border: 4px solid transparent;
+  border-radius: 15px 15px 15px 15px;
+  object-fit: cover;
+}
 
-  body.panel .card input {
-    padding: 5px;
-    outline: none;
-    border: none;
-    background-color: #b6ecbf;
-    border-bottom: #98cea1 2px solid;
-    border-radius: 10px;
-    margin-top: 5px;
-  }
+body.panel .card .img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 100%;
+  border: 4px solid transparent;
+  border-radius: 15px 15px 15px 15px;
+}
 
-  body.panel .card .desc {
-    width: 90%;
-    height: 115px;
-    overflow: hidden;
-    padding: 5px;
-    resize: none;
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    background-color: #b6ecbf;
-    margin-bottom: 10px;
-  }
+body.panel .card hr {
+  width: 90%;
+  height: 1px;
+  border: none;
+  background-color: #305936;
+}
 
-  body.panel .card form button {
-    width: 75px;
-    height: 25px;
-    padding: 5px;
-    background-color: #b6ecbf;
-    color: #000000;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+body.panel .card form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
-  body.panel .card form.delete {
-    margin-top: 10px;
-  }
+body.panel .card input {
+  padding: 5px;
+  outline: none;
+  border: none;
+  background-color: #b6ecbf;
+  border-bottom: #98cea1 2px solid;
+  border-radius: 10px;
+  margin-top: 5px;
+}
 
-  body.panelreservation main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+body.panel .card .desc {
+  width: 90%;
+  height: 115px;
+  overflow: hidden;
+  padding: 5px;
+  resize: none;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #b6ecbf;
+  margin-bottom: 10px;
+}
 
-  body.panelreservation .all-cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    margin-top: 15px;
-  }  
-  body.panelreservation .all-cards .article{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #709b77;
-    width: 300px;
-    height: 340px;
-    border-radius: 15px;
-  }
+body.panel .card form button {
+  width: 75px;
+  height: 25px;
+  padding: 5px;
+  background-color: #b6ecbf;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-  body.panelreservation .all-cards .article p.nom_article {
-    margin-top: 10px;
-  }
+body.panel .card form.delete {
+  margin-top: 10px;
+}
 
-  body.panelreservation .all-cards .article img {
-    height: 175px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 15px 15px 0px 0px;
-    border-bottom: #305936 solid 2px;
-  }
+body.panelreservation main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  body.panelreservation .all-cards .article .article_reserved {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 95%;
-    margin-top: 10px;
-  }
+body.panelreservation .all-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-top: 15px;
+}
+body.panelreservation .all-cards .article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #709b77;
+  width: 300px;
+  height: 340px;
+  border-radius: 15px;
+}
 
-  body.panelreservation .all-cards .article .article_reserved .qrcode{
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-  }
+body.panelreservation .all-cards .article p.nom_article {
+  margin-top: 10px;
+}
 
-  body.panelreservation .all-cards .article .article_reserved form {
-    margin-top: 10px;
-    margin-left: auto;
-  }
+body.panelreservation .all-cards .article img {
+  height: 175px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px 15px 0px 0px;
+  border-bottom: #305936 solid 2px;
+}
 
-  body.panelreservation .all-cards .article .removereservation {
-    margin: auto;
-    border: none;
-    background:none;
-    cursor: pointer;
-    margin-left: auto;
-  }
+body.panelreservation .all-cards .article .article_reserved {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 95%;
+  margin-top: 10px;
+}
 
-  body.panelreservation .all-cards .article .removereservation i::before {
-    display: block;
-    font-size: 30px;
-    height: 30px;
-    width: 30px;
-  }
+body.panelreservation .all-cards .article .article_reserved .qrcode {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+body.panelreservation .all-cards .article .article_reserved form {
+  margin-top: 10px;
+  margin-left: auto;
+}
+
+body.panelreservation .all-cards .article .removereservation {
+  margin: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+body.panelreservation .all-cards .article .removereservation i::before {
+  display: block;
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+}
